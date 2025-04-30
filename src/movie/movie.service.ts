@@ -118,13 +118,15 @@ export class MovieService {
     return true;
   }
 
-  /*
-
   async delete(id: string): Promise<string> {
     const movie = await this.findById(id);
 
-    await this.movieRepository.remove(movie);
+    await this.prismaService.movie.delete({
+      where: {
+        id: movie.id,
+      },
+    });
 
     return movie.id;
-  }*/
+  }
 }

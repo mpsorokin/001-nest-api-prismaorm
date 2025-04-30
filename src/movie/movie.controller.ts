@@ -34,9 +34,8 @@ export class MovieController {
     return this.movieService.update(id, dto);
   }
 
-  /*
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.movieService.delete(id);
-  }*/
+  }
 }
