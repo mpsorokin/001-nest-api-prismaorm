@@ -18,10 +18,27 @@ model Movie {
   isAvailable Boolean    @default(false) @map("is_available")
   genre       MovieGenre @default(ACTION)
 
+  reviews Review[] @relation("movie_reviews")
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("movies")
+}
+
+model Review {
+  id String @id @default(uuid(4))
+
+  test   String
+  rating Decimal @default(0.0)
+
+  movie   Movie  @relation("movie_reviews", fields: [movieId], references: [id], onDelete: Cascade)
+  movieId String @map("movie_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("reviews")
 }
 
 enum MovieGenre {
