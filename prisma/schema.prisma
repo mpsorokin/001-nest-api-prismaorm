@@ -47,7 +47,7 @@ model MoviePoster {
 model Review {
   id String @id @default(uuid(4))
 
-  test   String
+  text   String
   rating Decimal @default(0.0)
 
   movie   Movie  @relation("movie_reviews", fields: [movieId], references: [id], onDelete: Cascade)
