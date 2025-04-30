@@ -18,13 +18,30 @@ model Movie {
   isAvailable Boolean    @default(false) @map("is_available")
   genre       MovieGenre @default(ACTION)
 
+  poster   MoviePoster @relation(fields: [posterId], references: [id])
+  posterId String      @unique @map("poster_id")
+
   reviews Review[] @relation("movie_reviews")
-  actors Actor[] @relation("movie_actors")
+  actors  Actor[]  @relation("movie_actors")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  moviePosterId String
+
+  @@map("movies")
+}
+
+model MoviePoster {
+  id String @id @default(uuid(4))
+
+  url String
+
+  movie Movie? @relation
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("movies")
+  @@map("movie_poster")
 }
 
 model Review {
