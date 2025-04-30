@@ -18,7 +18,6 @@ import { PrismaModule } from './prisma/prisma.module';
     MovieModule,
     ReviewModule,
     ActorModule,
-    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
