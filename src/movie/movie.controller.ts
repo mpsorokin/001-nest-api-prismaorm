@@ -24,13 +24,12 @@ export class MovieController {
     return this.movieService.create(dto);
   }
 
-  /*@Get(':id')
+  @Get(':id')
   findById(@Param('id') id: string) {
     return this.movieService.findById(id);
   }
 
-
-
+  /*
   @Put(':id')
   update(@Param('id') id: string, @Body() dto: MovieDto) {
     return this.movieService.update(id, dto);

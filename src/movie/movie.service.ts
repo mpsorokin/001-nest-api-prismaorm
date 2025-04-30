@@ -63,35 +63,26 @@ export class MovieService {
     return movie;
   }
 
-  /*async findAll(): Promise<MovieEntity[]> {
-    return await this.movieRepository.find({
-      where: {
-        //isPublic: true,
-      },
-      order: {
-        createdAt: 'desc',
-      },
-      //take: 2,
-      /!*select: {
-        id: true,
-        title: true,
-      },*!/
-    });
-  }
-
-  async findById(id: string): Promise<MovieEntity> {
-    const movie = await this.movieRepository.findOne({
+  async findById(id: string): Promise<Movie> {
+    const movie = await this.prismaService.movie.findUnique({
       where: {
         id,
       },
-      relations: ['actors'],
+      include: {
+        actors: true,
+        poster: true,
+      },
     });
-    if (!movie) {
+    if (!movie || !movie.isAvailable) {
       throw new NotFoundException(`Movie with id ${id} not found`);
     }
 
     return movie;
   }
+
+  /*
+
+
 
 
 
