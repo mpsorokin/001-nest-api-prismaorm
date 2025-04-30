@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "e3a515e6-8bc0-4a6f-9ad2-86e3efc0df0f",
+		"name": "111-nest-js-101",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32381371"
+	},
+	"item": [
+		{
+			"name": "tasks",
+			"item": [
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Task: New task 3\",\r\n    \"description\": \"Test description\",\r\n    \"priority\": 1,\r\n    \"tags\": [\"work\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/task/create",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"task",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Updated task 1\",\r\n    \"isCompleted\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/task/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"task",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Task",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Patched task 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/task/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"task",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Task Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/task/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"task",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/task/all",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"task",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Task By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/task/by-id/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"task",
+								"by-id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "movie",
+			"item": [
+				{
+					"name": "review",
+					"item": [
+						{
+							"name": "Create Review",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Good movie\",\r\n    \"rating\": 8.0,\r\n    \"movieId\": \"96b76a15-41a5-4859-aed3-2240bbddee66\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/reviews",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "actor",
+					"item": [
+						{
+							"name": "Create Actor",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"John Deer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/actors",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"actors"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/movie",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"movie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/movie/411696d4-c749-4653-b839-f3f0bf871809",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"movie",
+								"411696d4-c749-4653-b839-f3f0bf871809"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/movie/6",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"movie",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Fight Club\",\r\n    \"releaseYear\": 1999,\r\n    \"imageUrl\": \"test url\",\r\n    \"actorIds\": [\"83171f1c-9952-4319-b947-598fcf5405d2\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/movie",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"movie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Updated Movie\",\r\n    \"releaseYear\": 2020\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/movie/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"movie",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
