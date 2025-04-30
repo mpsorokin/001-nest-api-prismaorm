@@ -73,27 +73,52 @@ export class MovieService {
         poster: true,
       },
     });
-    if (!movie || !movie.isAvailable) {
+    if (!movie) {
       throw new NotFoundException(`Movie with id ${id} not found`);
     }
 
     return movie;
   }
 
-  /*
-
-
-
-
-
   async update(id: string, dto: MovieDto): Promise<boolean> {
     const movie = await this.findById(id);
-    Object.assign(movie, dto);
 
-    await this.movieRepository.save(movie);
+    const actors = await this.prismaService.actor.findMany({
+      where: {
+        id: { in: dto.actorIds },
+      },
+    });
+
+    if (!actors || !actors.length) {
+      throw new NotFoundException(`actors not found`);
+    }
+
+    await this.prismaService.movie.update({
+      where: {
+        id: movie.id,
+      },
+      data: {
+        title: dto.title,
+        releaseYear: dto.releaseYear,
+        poster: dto.imageUrl
+          ? {
+              create: {
+                url: dto.imageUrl,
+              },
+            }
+          : undefined,
+        actors: {
+          connect: actors.map((actor) => ({
+            id: actor.id,
+          })),
+        },
+      },
+    });
 
     return true;
   }
+
+  /*
 
   async delete(id: string): Promise<string> {
     const movie = await this.findById(id);

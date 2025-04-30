@@ -29,12 +29,12 @@ export class MovieController {
     return this.movieService.findById(id);
   }
 
-  /*
   @Put(':id')
   update(@Param('id') id: string, @Body() dto: MovieDto) {
     return this.movieService.update(id, dto);
   }
 
+  /*
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.movieService.delete(id);
