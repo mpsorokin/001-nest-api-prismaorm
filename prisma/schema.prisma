@@ -28,6 +28,7 @@ model Movie {
   updatedAt     DateTime @updatedAt @map("updated_at")
   moviePosterId String
 
+  @@index([releaseYear, title])
   @@map("movies")
 }
 
