@@ -19,15 +19,17 @@ export class MovieController {
     return this.movieService.findAll();
   }
 
+  @Post()
+  create(@Body() dto: MovieDto) {
+    return this.movieService.create(dto);
+  }
+
   /*@Get(':id')
   findById(@Param('id') id: string) {
     return this.movieService.findById(id);
   }
 
-  @Post()
-  create(@Body() dto: MovieDto) {
-    return this.movieService.create(dto);
-  }
+
 
   @Put(':id')
   update(@Param('id') id: string, @Body() dto: MovieDto) {

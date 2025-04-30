@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { MovieDto } from './dto/movie.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { Movie, MoviePoster } from '../../generated/prisma';
+import { Movie } from '../../generated/prisma';
 
 @Injectable()
 export class MovieService {
