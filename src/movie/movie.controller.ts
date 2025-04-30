@@ -12,14 +12,14 @@ import { MovieDto } from './dto/movie.dto';
 
 @Controller('movie')
 export class MovieController {
-  /*constructor(private readonly movieService: MovieService) {}
+  constructor(private readonly movieService: MovieService) {}
 
   @Get()
   findAll() {
     return this.movieService.findAll();
   }
 
-  @Get(':id')
+  /*@Get(':id')
   findById(@Param('id') id: string) {
     return this.movieService.findById(id);
   }

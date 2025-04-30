@@ -1,18 +1,69 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { MovieDto } from './dto/movie.dto';
+import { PrismaService } from '../prisma/prisma.service';
+import { Movie, MoviePoster } from '../../generated/prisma';
 
 @Injectable()
 export class MovieService {
-  /*constructor(
-    @InjectRepository(MovieEntity)
-    private readonly movieRepository: Repository<MovieEntity>,
-    @InjectRepository(MoviePosterEntity)
-    private readonly posterRepository: Repository<MoviePosterEntity>,
-    @InjectRepository(ActorEntity)
-    private readonly actorRepository: Repository<ActorEntity>,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
-  async findAll(): Promise<MovieEntity[]> {
+  async findAll() {
+    return await this.prismaService.movie.findMany({
+      where: {
+        isAvailable: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        title: true,
+        actors: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+  }
+
+  async create(dto: MovieDto): Promise<Movie> {
+    const { title, releaseYear, imageUrl, actorIds } = dto;
+
+    const actors = await this.prismaService.actor.findMany({
+      where: {
+        id: { in: actorIds },
+      },
+    });
+
+    if (!actors || !actors.length) {
+      throw new NotFoundException(`actors not found`);
+    }
+
+    const movie = await this.prismaService.movie.create({
+      data: {
+        title,
+        releaseYear,
+        poster: imageUrl
+          ? {
+              create: {
+                url: imageUrl,
+              },
+            }
+          : undefined,
+        actors: {
+          connect: actors.map((actor) => ({
+            id: actor.id,
+          })),
+        },
+      },
+    });
+
+    return movie;
+  }
+
+  /*async findAll(): Promise<MovieEntity[]> {
     return await this.movieRepository.find({
       where: {
         //isPublic: true,
@@ -42,38 +93,7 @@ export class MovieService {
     return movie;
   }
 
-  async create(dto: MovieDto): Promise<MovieEntity> {
-    const { title, releaseYear, imageUrl, actorIds } = dto;
 
-    const actors = await this.actorRepository.find({
-      where: {
-        id: In(actorIds),
-      },
-    });
-
-    if (!actors || !actors.length) {
-      throw new NotFoundException(`actors not found`);
-    }
-
-    let poster: MoviePosterEntity | null = null;
-
-    if (imageUrl) {
-      poster = this.posterRepository.create({
-        url: imageUrl,
-      });
-
-      await this.posterRepository.save(poster);
-    }
-
-    const movie = this.movieRepository.create({
-      title,
-      releaseYear,
-      poster,
-      actors,
-    });
-
-    return await this.movieRepository.save(movie);
-  }
 
   async update(id: string, dto: MovieDto): Promise<boolean> {
     const movie = await this.findById(id);
