@@ -37,6 +37,7 @@ export class MovieDto {
   @IsString()
   poster?: string;
 
+  @ApiProperty({ description: 'Actor ids', example: ['2012'], type: [String] })
   @IsArray()
   @IsUUID('4', {
     each: true,
