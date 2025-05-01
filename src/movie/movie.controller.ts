@@ -61,7 +61,13 @@ export class MovieController {
   })*/
   @ApiHeader({ name: 'Authorization', description: 'Auth token' })
   @ApiOkResponse({ description: 'Success' })
-  @ApiNotFoundResponse({ description: 'Not Found' })
+  @ApiNotFoundResponse({
+    description: 'Not Found',
+    example: {
+      status: HttpStatus.NOT_FOUND,
+      message: 'Not Found',
+    },
+  })
   @Get(':id')
   findById(@Param('id') id: string) {
     return this.movieService.findById(id);
