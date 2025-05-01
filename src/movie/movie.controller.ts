@@ -13,6 +13,8 @@ import { MovieDto } from './dto/movie.dto';
 import {
   ApiBody,
   ApiHeader,
+  ApiNotFoundResponse,
+  ApiOkResponse,
   ApiOperation,
   ApiParam,
   ApiQuery,
@@ -58,8 +60,8 @@ export class MovieController {
     required: false,
   })*/
   @ApiHeader({ name: 'Authorization', description: 'Auth token' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Success' })
-  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Not Found' })
+  @ApiOkResponse({ description: 'Success' })
+  @ApiNotFoundResponse({ description: 'Not Found' })
   @Get(':id')
   findById(@Param('id') id: string) {
     return this.movieService.findById(id);
